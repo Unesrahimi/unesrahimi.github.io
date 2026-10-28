@@ -1,0 +1,1627 @@
+/* =========================================================
+   Unes Rahimi — Personal Brand Website
+   ساختار فایل:
+   1. توکن‌های برند (رنگ، فونت، فاصله)
+   2. پایه و ریست
+   3. اجزای عمومی (دکمه، عنوان بخش، ...)
+   4. منو
+   5. بخش‌ها: Hero / Marquee / About / Values / Contact / Footer
+   6. انیمیشن‌ها
+   7. ریسپانسیو
+   8. کاهش حرکت
+   نکته: از ویژگی‌های منطقی (inline-start / inline-end) استفاده شده
+   تا با عوض شدن زبان، چیدمان راست‌به‌چپ و چپ‌به‌راست خودکار جابه‌جا شود.
+   ========================================================= */
+
+
+/* ---------- 1. توکن‌های برند ---------- */
+:root {
+  /* رنگ‌های برندگاید */
+  --cream: #FFFBF5;
+  --cream-deep: #F5EEE3;
+  --orange: #BF400D;
+  --coral: #E0724D;
+  --navy: #033F59;
+  --ink: #141110;
+
+  /* رنگ‌های کمکی */
+  --muted: #6F6862;
+  --line: rgba(20, 17, 16, 0.12);
+  --line-strong: rgba(20, 17, 16, 0.85);
+  --on-navy: rgba(255, 251, 245, 0.72);
+  --on-navy-line: rgba(255, 251, 245, 0.2);
+
+  /* تایپوگرافی */
+  --font-fa: "Estedad", Tahoma, sans-serif;
+  --font-en: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+
+  /* اندازه‌ها */
+  --container: 1180px;
+  --gutter: clamp(18px, 5vw, 48px);
+  --header-height: 76px;
+  --section-space: clamp(88px, 12vw, 160px);
+  --radius: 18px;
+
+  /* حرکت */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+
+/* ---------- 2. پایه ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-height);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-fa);
+  font-size: 16px;
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+html[lang="en"] body {
+  font-family: var(--font-en);
+  line-height: 1.7;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+h1, h2, h3, p, ul, blockquote {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+::selection {
+  background: var(--orange);
+  color: var(--cream);
+}
+
+/* حلقه فوکوس واضح فقط برای صفحه‌کلید */
+:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.container {
+  width: min(var(--container), 100% - var(--gutter) * 2);
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  inset-inline-start: 12px;
+  z-index: 2000;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 8px;
+  transform: translateY(-150%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+
+/* ---------- 3. اجزای عمومی ---------- */
+.accent {
+  color: var(--orange);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    background-color 0.3s var(--ease-out),
+    color 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.btn-primary:hover {
+  background: var(--orange);
+}
+
+.btn-arrow {
+  display: inline-block;
+  font-family: var(--font-en);
+  transition: transform 0.3s var(--ease-out);
+}
+
+.btn-primary:hover .btn-arrow {
+  transform: translateY(3px);
+}
+
+.btn-ghost {
+  border: 1px solid var(--line-strong);
+}
+
+.btn-ghost:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-space);
+}
+
+.section-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+  gap: clamp(40px, 7vw, 110px);
+  align-items: start;
+}
+
+.section-index {
+  display: inline-block;
+  margin-block-end: 18px;
+  padding-block-end: 6px;
+  border-bottom: 2px solid var(--orange);
+  color: var(--orange);
+  font-family: var(--font-en);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.section-heading h2,
+.contact-heading h2 {
+  font-size: clamp(34px, 4.6vw, 60px);
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+html[lang="en"] .section-heading h2,
+html[lang="en"] .contact-heading h2 {
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+
+/* ---------- 4. منو ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  inset-inline-start: 0;
+  z-index: 1100;
+  width: 100%;
+  height: 3px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: right center;
+  pointer-events: none;
+}
+
+html[dir="ltr"] .scroll-progress {
+  transform-origin: left center;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 251, 245, 0.82);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar.is-scrolled {
+  border-bottom-color: var(--line);
+  background: rgba(255, 251, 245, 0.94);
+}
+
+.navbar-inner {
+  min-height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: baseline;
+  font-family: var(--font-en);
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  direction: ltr;
+}
+
+.logo span {
+  color: var(--orange);
+  transition: transform 0.3s var(--ease-out);
+  display: inline-block;
+}
+
+.logo:hover span {
+  transform: translateY(-4px);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 3.5vw, 48px);
+}
+
+.nav-links a {
+  position: relative;
+  padding-block: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.25s ease;
+}
+
+/* خط زیر لینک فعال */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transition: transform 0.35s var(--ease-out);
+}
+
+.nav-links a:hover,
+.nav-links a.is-active {
+  color: var(--ink);
+}
+
+.nav-links a:hover::after,
+.nav-links a.is-active::after {
+  transform: scaleX(1);
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.language-toggle {
+  min-width: 52px;
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-family: var(--font-en);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* وقتی دکمه «فا» را نشان می‌دهد */
+html[lang="en"] .language-toggle {
+  font-family: var(--font-fa);
+  font-size: 14px;
+}
+
+.language-toggle:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+/* دکمه همبرگری — فقط در موبایل دیده می‌شود */
+.menu-toggle {
+  display: none;
+  position: relative;
+  width: 42px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+}
+
+.menu-toggle span {
+  position: absolute;
+  left: 50%;
+  width: 16px;
+  height: 1.5px;
+  margin-left: -8px;
+  background: currentColor;
+  transition: transform 0.35s var(--ease-out), top 0.35s var(--ease-out);
+}
+
+.menu-toggle span:first-child { top: 15px; }
+.menu-toggle span:last-child { top: 21px; }
+
+.menu-open .menu-toggle span:first-child {
+  top: 18px;
+  transform: rotate(45deg);
+}
+
+.menu-open .menu-toggle span:last-child {
+  top: 18px;
+  transform: rotate(-45deg);
+}
+
+
+/* ---------- 5-1. Hero ---------- */
+.hero {
+  position: relative;
+  min-height: calc(100svh - var(--header-height));
+  display: flex;
+  align-items: center;
+  padding-block: clamp(48px, 8vh, 96px);
+  overflow: hidden;
+}
+
+/* لکه نوری ملایم پشت تصویر */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 8%;
+  inset-inline-end: -10%;
+  width: 46vw;
+  max-width: 640px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(224, 114, 77, 0.18), transparent 65%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: clamp(40px, 7vw, 110px);
+}
+
+.hero-title {
+  font-family: var(--font-en);
+  font-size: clamp(64px, 9.5vw, 136px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+  /* اسم انگلیسی همیشه چپ‌چین خوانده شود؛
+     در حالت فارسی، خود بلوک به سمت راست ستون می‌چسبد */
+  direction: ltr;
+  text-align: left;
+  width: fit-content;
+  margin-inline-start: 0;
+}
+
+/* هر خط عنوان از پایین بالا می‌آید (ماسک) */
+.hero-title .line {
+  display: block;
+  overflow: hidden;
+  /* فضای کافی تا نقطه نارنجی و دنباله حروف بریده نشوند */
+  padding-block: 0.04em 0.1em;
+  padding-right: 0.14em;
+  margin-right: -0.14em;
+}
+
+.hero-title .line > span {
+  display: inline-block;
+}
+
+.hero-tagline {
+  margin-block: 32px 12px;
+  font-size: clamp(22px, 2.3vw, 30px);
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--navy);
+}
+
+html[lang="en"] .hero-tagline {
+  letter-spacing: -0.02em;
+}
+
+.hero-mark {
+  /* شعار برند با فونت انگلیسی ظریف و مینیمال */
+  font-family: var(--font-en);
+  font-size: clamp(13px, 1.1vw, 15px);
+  font-weight: 300;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* خط نازک نارنجی قبل از شعار */
+.hero-mark::before {
+  content: "";
+  display: inline-block;
+  width: 36px;
+  height: 1px;
+  margin-inline-end: 16px;
+  vertical-align: middle;
+  background: var(--orange);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-block-start: 36px;
+}
+
+.hero-visual {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 400px);
+}
+
+.portrait-frame {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px 999px var(--radius) var(--radius);
+  background: var(--cream-deep);
+}
+
+.portrait-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  border-radius: 999px 999px 8px 8px;
+  filter: grayscale(1) contrast(1.05);
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  width: 26px;
+  height: 42px;
+  margin-left: -13px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 999px;
+}
+
+.scroll-cue span {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 3px;
+  height: 8px;
+  margin-left: -1.5px;
+  border-radius: 3px;
+  background: var(--orange);
+  animation: scroll-cue 1.8s var(--ease-in-out) infinite;
+}
+
+
+/* ---------- 5-3. درباره من ---------- */
+.about {
+  background: var(--cream);
+}
+
+.about .section-heading {
+  position: sticky;
+  top: calc(var(--header-height) + 40px);
+}
+
+.about-content p {
+  color: #4A433E;
+  font-size: 17px;
+  line-height: 2.2;
+}
+
+html[lang="en"] .about-content p {
+  line-height: 1.85;
+}
+
+.about-content p + p {
+  margin-block-start: 22px;
+}
+
+.about-content .lead {
+  color: var(--ink);
+  font-size: clamp(20px, 1.9vw, 25px);
+  font-weight: 600;
+  line-height: 2;
+}
+
+html[lang="en"] .about-content .lead {
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+.pull-quote {
+  position: relative;
+  margin-block-start: 48px;
+  padding: 32px 36px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: var(--cream);
+  overflow: hidden;
+}
+
+.pull-quote p {
+  position: relative;
+  color: var(--cream);
+  font-size: clamp(19px, 1.8vw, 24px);
+  font-weight: 700;
+  line-height: 1.8;
+}
+
+.quote-mark {
+  position: absolute;
+  top: -28px;
+  inset-inline-end: 20px;
+  color: var(--orange);
+  font-family: Georgia, serif;
+  font-size: 150px;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+
+/* ---------- 5-3-1. مسیر حرفه‌ای ---------- */
+.career {
+  background: var(--cream-deep);
+}
+
+.career .section-heading {
+  position: sticky;
+  top: calc(var(--header-height) + 40px);
+}
+
+/* اعداد کلیدی */
+.stats {
+  display: grid;
+  gap: 0;
+  margin: 44px 0 0;
+  border-top: 1px solid var(--line-strong);
+}
+
+.stat {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding-block: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.stat dd {
+  order: -1;
+  min-width: 132px;
+  direction: ltr; /* تا «~۵» در فارسی برعکس نشود */
+  unicode-bidi: isolate;
+  text-align: left;
+  margin: 0;
+  color: var(--orange);
+  font-size: clamp(34px, 3.4vw, 46px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+html[dir="rtl"] .stat dd {
+  text-align: right;
+}
+
+html[lang="en"] .stat dd {
+  letter-spacing: -0.05em;
+}
+
+.stat dt {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* معرفی حرفه‌ای */
+.profile p {
+  color: #4A433E;
+  font-size: 17px;
+  line-height: 2.2;
+}
+
+html[lang="en"] .profile p {
+  line-height: 1.85;
+}
+
+.profile p + p {
+  margin-block-start: 20px;
+}
+
+.profile .lead {
+  color: var(--ink);
+  font-size: clamp(20px, 1.9vw, 25px);
+  font-weight: 600;
+  line-height: 2;
+}
+
+html[lang="en"] .profile .lead {
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+/* شرکت */
+.company {
+  margin-block-start: clamp(56px, 7vw, 88px);
+}
+
+.company-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-block-end: 18px;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.company-name {
+  font-family: var(--font-en);
+  font-size: clamp(30px, 3.2vw, 42px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.company-meta {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.company-intro {
+  margin-block: 22px 40px;
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 2;
+}
+
+html[lang="en"] .company-intro {
+  line-height: 1.75;
+}
+
+/* تایم‌لاین */
+.timeline {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  padding-inline-start: 36px;
+  list-style: none;
+}
+
+/* خط عمودی */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  inset-inline-start: 6px;
+  width: 1px;
+  background: var(--line-strong);
+}
+
+.role {
+  position: relative;
+  padding-block-end: 40px;
+}
+
+.role:last-child {
+  padding-block-end: 0;
+}
+
+/* نقطه روی خط */
+.role::before {
+  content: "";
+  position: absolute;
+  top: 9px;
+  inset-inline-start: -36px;
+  width: 13px;
+  height: 13px;
+  border: 2px solid var(--orange);
+  border-radius: 50%;
+  background: var(--cream-deep);
+}
+
+.role.is-current::before {
+  background: var(--orange);
+  box-shadow: 0 0 0 6px rgba(191, 64, 13, 0.15);
+}
+
+.role-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin-block-end: 14px;
+}
+
+.role-head h4 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+html[lang="en"] .role-head h4 {
+  letter-spacing: -0.02em;
+}
+
+.role-badge {
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--cream);
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.8;
+  white-space: nowrap;
+}
+
+.role-badge--muted {
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--muted);
+}
+
+.role-tasks {
+  display: grid;
+  gap: 6px;
+}
+
+.role-tasks li {
+  position: relative;
+  padding-inline-start: 22px;
+  color: #4A433E;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+html[lang="en"] .role-tasks li {
+  line-height: 1.65;
+}
+
+/* خط کوتاه به‌جای بولت */
+.role-tasks li::before {
+  content: "";
+  position: absolute;
+  top: 0.95em;
+  inset-inline-start: 0;
+  width: 10px;
+  height: 2px;
+  background: var(--orange);
+}
+
+html[lang="en"] .role-tasks li::before {
+  top: 0.8em;
+}
+
+
+/* ---------- 5-3-2. تحصیلات و مهارت‌ها ---------- */
+.skills {
+  background: var(--cream);
+}
+
+/* تحصیلات: سرمه‌ای + نارنجی + کرم */
+.education {
+  background: var(--navy);
+  color: var(--cream);
+}
+
+.education .section-index {
+  color: var(--coral);
+  border-color: var(--coral);
+}
+
+/* دو باکس زیر هم */
+.edu-list {
+  position: relative;
+  display: grid;
+  gap: 18px;
+}
+
+.edu-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px minmax(150px, 0.45fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px clamp(20px, 3vw, 40px);
+  padding: clamp(26px, 3vw, 38px) clamp(24px, 3.5vw, 44px);
+  border-radius: var(--radius);
+  background: var(--cream);
+  color: var(--ink);
+  overflow: hidden;
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+
+/* نوار نارنجی کنار باکس */
+.edu-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  inset-inline-start: 0;
+  width: 5px;
+  background: var(--orange);
+}
+
+.edu-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.45);
+}
+
+.edu-step {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1.5px solid var(--navy);
+  border-radius: 50%;
+  color: var(--navy);
+  font-family: var(--font-en);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.edu-card.is-current .edu-step {
+  border-color: var(--orange);
+  background: var(--orange);
+  color: var(--cream);
+}
+
+.edu-mark {
+  font-family: var(--font-en);
+  font-size: clamp(40px, 4.4vw, 60px);
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--orange);
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+html[dir="rtl"] .edu-mark {
+  text-align: right;
+}
+
+.edu-info h3 {
+  color: var(--navy);
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+html[lang="en"] .edu-info h3 {
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.edu-info p {
+  margin-block-start: 4px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.edu-status {
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--cream);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.8;
+  white-space: nowrap;
+}
+
+.edu-status--done {
+  background: var(--navy);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 16px;
+}
+
+.skill-group {
+  padding: 28px 26px 30px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--cream-deep);
+}
+
+.skill-group h3 {
+  margin-block: 36px 20px;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+html[lang="en"] .skill-group h3 {
+  letter-spacing: -0.02em;
+}
+
+/* برچسب‌های مهارت */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chips li {
+  padding: 5px 14px;
+  border: 1px solid rgba(20, 17, 16, 0.18);
+  border-radius: 999px;
+  background: var(--cream);
+  font-size: 13.5px;
+  line-height: 1.8;
+  transition: border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease;
+}
+
+.chips li:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.section-intro {
+  max-width: 640px;
+  margin-block-start: 20px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 2.1;
+}
+
+html[lang="en"] .section-intro {
+  line-height: 1.75;
+}
+
+
+/* ---------- 5-4. مهم‌ها ---------- */
+.values {
+  background: var(--cream-deep);
+}
+
+.section-heading--row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-block-end: clamp(40px, 6vw, 72px);
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.value-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  padding: 28px 26px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--cream);
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform 0.5s var(--ease-out),
+    color 0.5s var(--ease-out),
+    border-color 0.5s var(--ease-out);
+}
+
+/* لایه رنگی که هنگام هاور از پایین بالا می‌آید */
+.value-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--navy);
+  transform: translateY(101%);
+  transition: transform 0.55s var(--ease-out);
+}
+
+.value-card:hover {
+  transform: translateY(-6px);
+  color: var(--cream);
+  border-color: var(--navy);
+}
+
+.value-card:hover::before {
+  transform: translateY(0);
+}
+
+.value-number {
+  color: var(--orange);
+  font-family: var(--font-en);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  transition: color 0.5s var(--ease-out);
+}
+
+.value-card:hover .value-number {
+  color: var(--coral);
+}
+
+.value-card h3 {
+  margin-block: auto 10px;
+  padding-block-start: 48px;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+html[lang="en"] .value-card h3 {
+  letter-spacing: -0.02em;
+}
+
+.value-card p {
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.95;
+  transition: color 0.5s var(--ease-out);
+}
+
+html[lang="en"] .value-card p {
+  line-height: 1.65;
+}
+
+.value-card:hover p {
+  color: var(--on-navy);
+}
+
+
+/* ---------- 5-5. ارتباط ---------- */
+.contact {
+  background: var(--navy);
+  color: var(--cream);
+}
+
+.contact .section-index {
+  color: var(--coral);
+  border-color: var(--coral);
+}
+
+.contact-heading p {
+  max-width: 420px;
+  margin-block-start: 20px;
+  color: var(--on-navy);
+  line-height: 2;
+}
+
+html[lang="en"] .contact-heading p {
+  line-height: 1.75;
+}
+
+.contact-list {
+  border-top: 1px solid var(--on-navy-line);
+}
+
+.contact-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(110px, 0.6fr) 1fr auto;
+  align-items: center;
+  gap: 20px;
+  padding: 26px 4px;
+  border-bottom: 1px solid var(--on-navy-line);
+  transition: padding 0.4s var(--ease-out), color 0.3s ease;
+}
+
+.contact-label {
+  font-family: var(--font-en);
+  font-size: clamp(18px, 1.8vw, 22px);
+  font-weight: 700;
+}
+
+.contact-label[data-i18n] {
+  font-family: inherit;
+}
+
+.contact-value {
+  color: var(--on-navy);
+  font-family: var(--font-en);
+  font-size: 15px;
+  text-align: end;
+  unicode-bidi: isolate;
+}
+
+html[dir="rtl"] .contact-value {
+  text-align: left;
+}
+
+.contact-arrow {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--on-navy-line);
+  border-radius: 50%;
+  font-family: var(--font-en);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.4s var(--ease-out);
+}
+
+.contact-item:hover {
+  color: #F1A187;
+  padding-inline: 16px;
+}
+
+.contact-item:hover .contact-arrow {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: var(--cream);
+  transform: rotate(45deg);
+}
+
+
+/* ---------- 5-6. پانوشت ---------- */
+.footer {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 96px;
+}
+
+.footer-tagline {
+  font-family: var(--font-en);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--coral);
+}
+
+.footer-copy {
+  color: rgba(255, 251, 245, 0.55);
+  font-family: var(--font-en);
+  font-size: 12px;
+  white-space: nowrap;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 24px;
+  inset-inline-start: 24px;
+  z-index: 900;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: var(--cream);
+  font-family: var(--font-en);
+  font-size: 18px;
+  box-shadow: 0 12px 30px -10px rgba(191, 64, 13, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease,
+    transform 0.35s var(--ease-out),
+    background-color 0.25s ease;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--ink);
+}
+
+
+/* ---------- 6. انیمیشن‌ها ---------- */
+@keyframes scroll-cue {
+  0% { transform: translateY(0); opacity: 1; }
+  70% { transform: translateY(14px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+
+/* انیمیشن ورود عناصر — کلاس‌ها توسط script.js اضافه می‌شوند */
+html.motion-ready .reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.9s var(--ease-out),
+    transform 0.9s var(--ease-out);
+  transition-delay: var(--delay, 0ms);
+}
+
+html.motion-ready .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ورود عنوان اصلی خط‌به‌خط */
+html.motion-ready .hero-title .line > span {
+  transform: translateY(105%);
+  transition: transform 1.1s var(--ease-out);
+}
+
+html.motion-ready .hero-title .line:nth-child(2) > span {
+  transition-delay: 0.12s;
+}
+
+html.is-loaded .hero-title .line > span {
+  transform: none;
+}
+
+/* ورود تصویر */
+html.motion-ready .portrait-frame {
+  clip-path: inset(100% 0 0 0 round 999px 999px 18px 18px);
+  transition: clip-path 1.4s var(--ease-out) 0.2s;
+}
+
+html.is-loaded .portrait-frame {
+  clip-path: inset(0 0 0 0 round 999px 999px 18px 18px);
+}
+
+
+/* ---------- 7. ریسپانسیو ---------- */
+
+/* تبلت */
+@media (max-width: 1024px) {
+  .values-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .value-card {
+    min-height: 240px;
+  }
+}
+
+/* منوی همبرگری از عرض تبلت به پایین (۶ لینک در عرض کم جا نمی‌شوند) */
+@media (max-width: 1024px) {
+  /* منوی تمام‌صفحه */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* absolute نسبت به منو؛ چون backdrop-filter منو، fixed را خراب می‌کند */
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: calc(100svh - var(--header-height));
+    z-index: 999;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 24px var(--gutter);
+    background: var(--cream);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    transition:
+      opacity 0.35s ease,
+      visibility 0.35s ease,
+      transform 0.45s var(--ease-out);
+  }
+
+  .menu-open .nav-links {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .nav-links a {
+    padding-block: 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-size: 26px;
+    font-weight: 700;
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+
+  .nav-links a.is-active {
+    color: var(--orange);
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+}
+
+/* موبایل */
+@media (max-width: 760px) {
+  :root {
+    --header-height: 66px;
+  }
+
+  body {
+    font-size: 15px;
+  }
+
+  .logo {
+    font-size: 23px;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: auto;
+    padding-block: 36px 88px;
+  }
+
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+
+  .hero-title {
+    font-size: clamp(60px, 19vw, 96px);
+  }
+
+  .hero-tagline {
+    margin-block-start: 24px;
+  }
+
+  .hero-actions .btn {
+    flex: 1 1 auto;
+  }
+
+  .hero-visual {
+    width: min(100%, 300px);
+  }
+
+  .scroll-cue {
+    display: none;
+  }
+
+  /* بخش‌ها */
+  .section-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .about .section-heading,
+  .career .section-heading {
+    position: static;
+  }
+
+  .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-block-start: 28px;
+  }
+
+  .stat {
+    flex-direction: column;
+    gap: 8px;
+    border-bottom: 0;
+  }
+
+  .stat dd {
+    min-width: 0;
+    font-size: 32px;
+  }
+
+  .stat dt {
+    font-size: 12.5px;
+  }
+
+  .profile p {
+    font-size: 16px;
+  }
+
+  .timeline {
+    padding-inline-start: 28px;
+  }
+
+  .role::before {
+    inset-inline-start: -28px;
+  }
+
+  .role-head h4 {
+    font-size: 20px;
+  }
+
+  .edu-card {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "step   status"
+      "mark   mark"
+      "info   info";
+    gap: 18px 16px;
+  }
+
+  .edu-step { grid-area: step; width: 42px; height: 42px; }
+  .edu-mark { grid-area: mark; }
+  .edu-info { grid-area: info; }
+
+  .edu-status {
+    grid-area: status;
+    justify-self: end;
+  }
+
+  .skill-group h3 {
+    margin-block-start: 24px;
+  }
+
+  .about-content p {
+    font-size: 16px;
+  }
+
+  .pull-quote {
+    padding: 28px 24px;
+  }
+
+  .values-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .value-card {
+    min-height: 0;
+  }
+
+  .value-card h3 {
+    padding-block-start: 28px;
+    font-size: 22px;
+  }
+
+  .contact-item {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "label arrow"
+      "value arrow";
+    gap: 4px 16px;
+    padding-block: 20px;
+  }
+
+  .contact-label { grid-area: label; }
+  .contact-arrow { grid-area: arrow; }
+
+  .contact-value {
+    grid-area: value;
+    font-size: 14px;
+  }
+
+  html[dir="rtl"] .contact-value {
+    text-align: right;
+  }
+
+  .contact-item:hover {
+    padding-inline: 4px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    padding-block: 32px;
+    text-align: center;
+  }
+
+  .back-to-top {
+    bottom: 16px;
+    inset-inline-start: 16px;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* دستگاه‌های لمسی: هاور کارت‌ها را غیرفعال کن تا رنگ گیر نکند */
+@media (hover: none) {
+  .value-card:hover {
+    transform: none;
+    color: inherit;
+    border-color: var(--line);
+  }
+
+  .value-card:hover::before {
+    transform: translateY(101%);
+  }
+
+  .value-card:hover p {
+    color: var(--muted);
+  }
+
+  .value-card:hover .value-number {
+    color: var(--orange);
+  }
+}
+
+
+/* ---------- 8. کاهش حرکت (تنظیمات دسترسی‌پذیری دستگاه) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  html.motion-ready .reveal,
+  html.motion-ready .hero-title .line > span {
+    opacity: 1;
+    transform: none;
+  }
+
+  html.motion-ready .portrait-frame {
+    clip-path: none;
+  }
+}

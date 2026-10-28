@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ===== SEO و اشتراک‌گذاری ===== -->
+  <title>یونس رحیمی — Unes Rahimi</title>
+  <meta name="description" content="وب‌سایت شخصی یونس رحیمی؛ ایده‌ها، تجربه‌ها و مسیر رشد من.">
+  <meta name="author" content="Unes Rahimi">
+  <meta name="theme-color" content="#FFFBF5">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Unes Rahimi — Make Your Mark">
+  <meta property="og:description" content="وب‌سایت شخصی یونس رحیمی؛ ایده‌ها، تجربه‌ها و مسیر رشد من.">
+  <meta property="og:image" content="unes.jpg">
+
+  <!-- آیکون تب مرورگر (بدون نیاز به فایل جدا) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23141110'/%3E%3Ctext x='9' y='43' font-family='Arial,sans-serif' font-size='28' font-weight='800' fill='%23FFFBF5'%3EUR%3C/text%3E%3Ccircle cx='52' cy='41' r='4' fill='%23BF400D'/%3E%3C/svg%3E">
+
+  <!-- ===== فونت‌های برند: Estedad (فارسی) و Montserrat (انگلیسی) ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Estedad:wght@400;500;600;700;800&family=Montserrat:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <!-- لینک پرش برای کاربران صفحه‌کلید و صفحه‌خوان -->
+  <a class="skip-link" href="#main" data-i18n="skipLink">رفتن به محتوای اصلی</a>
+
+  <!-- نوار پیشرفت اسکرول -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- ================= منوی بالا ================= -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar-inner">
+
+      <a href="#home" class="logo" aria-label="Unes Rahimi">UR<span>.</span></a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#about" data-i18n="navAbout">درباره من</a>
+        <a href="#career" data-i18n="navCareer">مسیر حرفه‌ای</a>
+        <a href="#education" data-i18n="navEducation">تحصیلات</a>
+        <a href="#skills" data-i18n="navSkills">مهارت‌ها</a>
+        <a href="#values" data-i18n="navValues">مهم‌ها برای یونس</a>
+        <a href="#contact" data-i18n="navContact">ارتباط</a>
+      </nav>
+
+      <div class="navbar-actions">
+        <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch language to English">EN</button>
+
+        <!-- دکمه منوی موبایل -->
+        <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ================= ۱. معرفی ================= -->
+    <section class="hero" id="home">
+      <div class="container hero-inner">
+
+        <div class="hero-copy">
+          <h1 class="hero-title">
+            <span class="line"><span>Unes</span></span>
+            <span class="line"><span>Rahimi<span class="accent">.</span></span></span>
+          </h1>
+
+          <p class="hero-tagline" data-i18n="tagline">ایده‌ها رو زندگی کن.</p>
+
+          <p class="hero-mark">Make Your Mark</p>
+
+          <div class="hero-actions">
+            <a href="#about" class="btn btn-primary">
+              <span data-i18n="heroButton">بیشتر درباره من</span>
+              <span class="btn-arrow" aria-hidden="true">↓</span>
+            </a>
+            <a href="#contact" class="btn btn-ghost" data-i18n="heroButton2">در ارتباط باشیم</a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="portrait-frame">
+            <img src="unes.jpg" alt="پرتره یونس رحیمی" class="portrait-image" width="853" height="1280" fetchpriority="high">
+          </div>
+        </div>
+
+      </div>
+
+      <a href="#about" class="scroll-cue" aria-hidden="true" tabindex="-1">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ================= ۲. درباره من ================= -->
+    <section class="section about" id="about">
+      <div class="container section-grid">
+
+        <div class="section-heading">
+          <span class="section-index">01</span>
+          <h2 data-i18n="aboutTitle">در مسیر شناختن</h2>
+        </div>
+
+        <div class="about-content">
+          <p class="lead" data-i18n="aboutP1">
+            من یونس‌ام؛ آدمی کنجکاو، ایده‌پرداز و علاقه‌مند به کشف دنیای اطرافم. همیشه برام جذابه که چیزها رو از زاویه‌های متفاوت ببینم، سؤال بپرسم و ایده‌هایی رو دنبال کنم که شاید در نگاه اول فقط یک فکر ساده به نظر برسن.
+          </p>
+          <p data-i18n="aboutP2">
+            دوست دارم تجربه کنم، یاد بگیرم، بسازم و به چیزهایی که توی ذهنم شکل می‌گیرن، فرصت واقعی شدن بدم. برای من رشد کردن فقط بیشتر دونستن نیست؛ یعنی خودم رو بهتر بشناسم، نگاه تازه‌ای پیدا کنم و از هر تجربه چیزی با خودم ببرم.
+          </p>
+          <p data-i18n="aboutP3">
+            هنوز در حال کشف کردنم؛ هم دنیای اطرافم رو و هم خودم رو. این‌جا بخشی از مسیر منه؛ مسیری که قرار نیست از قبل همه‌چیزش معلوم باشه.
+          </p>
+
+          <blockquote class="pull-quote">
+            <span class="quote-mark" aria-hidden="true">“</span>
+            <p data-i18n="quote">با فکر شروع کن؛ با تجربه ادامه بده.</p>
+          </blockquote>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= ۳. مسیر حرفه‌ای ================= -->
+    <section class="section career" id="career">
+      <div class="container section-grid">
+
+        <div class="section-heading">
+          <span class="section-index">02</span>
+          <h2 data-i18n="careerTitle">مسیر حرفه‌ای</h2>
+
+          <!-- اعداد کلیدی -->
+          <dl class="stats">
+            <div class="stat">
+              <dt data-i18n="stat1Label">سال تجربه در خرده‌فروشی</dt>
+              <dd data-i18n="stat1Value">5+</dd>
+            </div>
+            <div class="stat">
+              <dt data-i18n="stat2Label">نفر در تیمی که هدایت می‌کنم</dt>
+              <dd data-i18n="stat2Value">3</dd>
+            </div>
+            <div class="stat">
+              <dt data-i18n="stat3Label">شروع مدیریت فروشگاه</dt>
+              <dd data-i18n="stat3Value">2024</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="career-content">
+
+          <!-- معرفی حرفه‌ای -->
+          <div class="profile">
+            <p class="lead" data-i18n="profileP1">فردی کنجکاو، خلاق و رشدمحور هستم؛ با پیشینه تحصیلی در علوم ورزشی و حدود پنج سال تجربه در حوزه خرده‌فروشی در KOMONO.</p>
+            <p data-i18n="profileP2">در این مسیر، مهارت‌های عملی در رهبری تیم، آموزش کارکنان، تجربه مشتری و بهبود عملکرد فروش به دست آورده‌ام. برای یادگیری مداوم، حل خلاقانه مسائل و تبدیل ایده‌ها به نتایج معنادار ارزش زیادی قائلم.</p>
+            <p data-i18n="profileP3">فراتر از کار حرفه‌ای، به کشف ایده‌های تازه، توسعه مهارت‌های دیجیتال و کار روی پروژه‌های شخصی علاقه دارم؛ پروژه‌هایی که به من فرصت یادگیری، آزمودن و رشد می‌دهند.</p>
+          </div>
+
+          <!-- تایم‌لاین KOMONO -->
+          <div class="company">
+            <div class="company-head">
+              <h3 class="company-name">KOMONO</h3>
+              <span class="company-meta" data-i18n="companyMeta">خرده‌فروشی و مدیریت فروشگاه · حدود ۵ سال</span>
+            </div>
+            <p class="company-intro" data-i18n="companyIntro">مسیر حرفه‌ای من در KOMONO با فروش شروع شد و به‌تدریج با پذیرفتن مسئولیت‌های سرپرستی، به جایگاه فعلی‌ام به‌عنوان مدیر فروشگاه رسید.</p>
+
+            <ol class="timeline">
+              <li class="role is-current">
+                <div class="role-head">
+                  <h4 data-i18n="role3Title">مدیر فروشگاه</h4>
+                  <span class="role-badge" data-i18n="role3Date">2024 — اکنون</span>
+                </div>
+                <ul class="role-tasks" data-i18n-list="role3Tasks">
+                  <li>مسئولیت کامل مدیریت شعبه KOMONO</li>
+                  <li>رهبری و هماهنگی یک تیم سه‌نفره</li>
+                  <li>آموزش و توسعه اعضای جدید تیم</li>
+                  <li>مدیریت عملیات روزانه فروشگاه و تقسیم مسئولیت‌های کارکنان</li>
+                  <li>پایش عملکرد فروش و تلاش برای بهبود نتایج</li>
+                  <li>حفظ استانداردهای تجربه و خدمات مشتری</li>
+                  <li>هماهنگی فعالیت‌های فروش و پشتیبانی از اهداف کسب‌وکار</li>
+                </ul>
+              </li>
+
+              <li class="role">
+                <div class="role-head">
+                  <h4 data-i18n="role2Title">سرپرست فروشگاه</h4>
+                </div>
+                <ul class="role-tasks" data-i18n-list="role2Tasks">
+                  <li>هماهنگی عملیات روزانه فروشگاه</li>
+                  <li>پشتیبانی از عملکرد و روند کاری تیم</li>
+                  <li>کمک به هماهنگی کارکنان و مدیریت فروشگاه</li>
+                </ul>
+              </li>
+
+              <li class="role">
+                <div class="role-head">
+                  <h4 data-i18n="role1Title">کارشناس فروش</h4>
+                  <span class="role-badge role-badge--muted" data-i18n="role1Date">شروع مسیر</span>
+                </div>
+                <ul class="role-tasks" data-i18n-list="role1Tasks">
+                  <li>خدمات مشتری و ایجاد ارتباط مثبت با مشتریان</li>
+                  <li>معرفی محصولات و انجام فرایند فروش</li>
+                  <li>پشتیبانی از فعالیت‌های روزانه فروشگاه</li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ۴. تحصیلات ================= -->
+    <section class="section education" id="education">
+      <div class="container">
+
+        <div class="section-heading section-heading--row">
+          <span class="section-index">03</span>
+          <h2 data-i18n="educationTitle">تحصیلات</h2>
+        </div>
+
+        <div class="edu-list">
+          <article class="edu-card">
+            <span class="edu-step">01</span>
+            <span class="edu-mark" aria-hidden="true">B.Sc.</span>
+            <div class="edu-info">
+              <h3 data-i18n="degreeBsc">کارشناسی علوم ورزشی</h3>
+              <p data-i18n="university">دانشگاه فردوسی مشهد، ایران</p>
+            </div>
+            <span class="edu-status edu-status--done" data-i18n="eduStatusDone">فارغ‌التحصیل</span>
+          </article>
+
+          <article class="edu-card is-current">
+            <span class="edu-step">02</span>
+            <span class="edu-mark" aria-hidden="true">M.Sc.</span>
+            <div class="edu-info">
+              <h3 data-i18n="degreeMsc">کارشناسی ارشد مدیریت علوم ورزشی</h3>
+            </div>
+            <span class="edu-status" data-i18n="eduStatusCurrent">در حال تحصیل</span>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= ۵. مهارت‌ها ================= -->
+    <section class="section skills" id="skills">
+      <div class="container">
+
+        <div class="section-heading section-heading--row">
+          <span class="section-index">04</span>
+          <h2 data-i18n="skillsTitle">مهارت‌ها</h2>
+        </div>
+
+        <!-- مهارت‌ها -->
+        <div class="skills-grid">
+          <article class="skill-group">
+            <span class="value-number">01</span>
+            <h3 data-i18n="skillGroup1">مدیریت فروشگاه و کسب‌وکار</h3>
+            <ul class="chips" data-i18n-list="skillList1">
+              <li>مدیریت فروشگاه خرده‌فروشی</li>
+              <li>مدیریت عملیات روزانه</li>
+              <li>بهبود عملکرد فروش</li>
+              <li>رهبری تیم</li>
+              <li>آموزش و توسعه کارکنان</li>
+              <li>هماهنگی تیم</li>
+            </ul>
+          </article>
+
+          <article class="skill-group">
+            <span class="value-number">02</span>
+            <h3 data-i18n="skillGroup2">مشتری و ارتباطات</h3>
+            <ul class="chips" data-i18n-list="skillList2">
+              <li>مدیریت تجربه مشتری</li>
+              <li>ایجاد ارتباط با مشتری</li>
+              <li>مهارت‌های ارتباطی و بین‌فردی</li>
+              <li>حل مسئله</li>
+            </ul>
+          </article>
+
+          <article class="skill-group">
+            <span class="value-number">03</span>
+            <h3 data-i18n="skillGroup3">نقاط قوت فردی</h3>
+            <ul class="chips" data-i18n-list="skillList3">
+              <li>تفکر خلاق</li>
+              <li>کنجکاوی و یادگیری مداوم</li>
+              <li>انعطاف‌پذیری</li>
+              <li>ابتکار عمل</li>
+              <li>تبدیل ایده به عمل</li>
+            </ul>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= ۶. مهم‌ها برای یونس ================= -->
+    <section class="section values" id="values">
+      <div class="container">
+
+        <div class="section-heading section-heading--row">
+          <span class="section-index">05</span>
+          <h2 data-i18n="valuesTitle">مهم‌ها برای یونس</h2>
+          <p class="section-intro" data-i18n="brandText">برند شخصی من بازتابی از کنجکاوی، خلاقیت، رشد و اثرگذاریه. به یادگیری از دل تجربه، دیدن زاویه‌های مختلف و تبدیل ایده به عمل باور دارم.</p>
+        </div>
+
+        <div class="values-grid">
+          <article class="value-card">
+            <span class="value-number">01</span>
+            <h3 data-i18n="value1Title">کنجکاوی</h3>
+            <p data-i18n="value1Text">سؤال پرسیدن و دیدن چیزها از زاویه‌های تازه.</p>
+          </article>
+
+          <article class="value-card">
+            <span class="value-number">02</span>
+            <h3 data-i18n="value2Title">ایده‌پردازی</h3>
+            <p data-i18n="value2Text">پیدا کردن امکان‌های تازه و تبدیل فکر به عمل.</p>
+          </article>
+
+          <article class="value-card">
+            <span class="value-number">03</span>
+            <h3 data-i18n="value3Title">رشد</h3>
+            <p data-i18n="value3Text">یاد گرفتن، تجربه کردن و شناخت بهتر خودم.</p>
+          </article>
+
+          <article class="value-card">
+            <span class="value-number">04</span>
+            <h3 data-i18n="value4Title">اثرگذاری</h3>
+            <p data-i18n="value4Text">ساختن چیزهایی که معنا داشته باشن و به کار بیان.</p>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= ۷. ارتباط ================= -->
+    <section class="section contact" id="contact">
+      <div class="container section-grid">
+
+        <div class="contact-heading">
+          <span class="section-index">06</span>
+          <h2 data-i18n="contactTitle">بیایم در ارتباط باشیم.</h2>
+          <p data-i18n="contactDescription">
+            اگه زمینه‌ای برای گفت‌وگو، تبادل ایده یا همکاری مشترک می‌بینی، خوشحال می‌شم از طریق راه‌های زیر باهام در ارتباط باشی.
+          </p>
+        </div>
+
+        <ul class="contact-list">
+          <li>
+            <a class="contact-item" href="https://www.linkedin.com/in/unes-rahimi/" target="_blank" rel="noopener noreferrer">
+              <span class="contact-label">LinkedIn</span>
+              <span class="contact-value" dir="ltr">/in/unes-rahimi</span>
+              <span class="contact-arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a class="contact-item" href="https://t.me/unes_rahimii" target="_blank" rel="noopener noreferrer">
+              <span class="contact-label">Telegram</span>
+              <span class="contact-value" dir="ltr">@unes_rahimii</span>
+              <span class="contact-arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a class="contact-item" href="https://wa.me/989154748294" target="_blank" rel="noopener noreferrer">
+              <span class="contact-label">WhatsApp</span>
+              <span class="contact-value" dir="ltr">+98 915 474 8294</span>
+              <span class="contact-arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a class="contact-item" href="tel:+989154748294">
+              <span class="contact-label" data-i18n="phoneLabel">تلفن</span>
+              <span class="contact-value" dir="ltr">0915 474 8294</span>
+              <span class="contact-arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= پانوشت ================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="#home" class="logo" aria-label="Back to top">UR<span>.</span></a>
+      <p class="footer-tagline">MAKE YOUR MARK</p>
+      <span class="footer-copy">© <span id="currentYear">2026</span> Unes Rahimi</span>
+    </div>
+  </footer>
+
+  <!-- دکمه بازگشت به بالا -->
+  <a href="#home" class="back-to-top" id="backToTop" aria-label="Back to top">↑</a>
+</body>
+</html>
