@@ -699,12 +699,12 @@ html[lang="en"] .profile .lead {
   letter-spacing: -0.01em;
 }
 
-/* شرکت */
-.company {
-  margin-block-start: clamp(56px, 7vw, 88px);
+/* مسیر پیشرفت در KOMONO */
+.journey-block {
+  margin-block-start: clamp(72px, 9vw, 120px);
 }
 
-.company-head {
+.journey-head {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -727,130 +727,169 @@ html[lang="en"] .profile .lead {
   font-size: 14px;
 }
 
-.company-intro {
-  margin-block: 22px 40px;
+.journey-intro {
+  max-width: 640px;
+  margin-block: 22px clamp(48px, 6vw, 72px);
   color: var(--muted);
-  font-size: 15.5px;
+  font-size: 16px;
   line-height: 2;
 }
 
-html[lang="en"] .company-intro {
+html[lang="en"] .journey-intro {
   line-height: 1.75;
 }
 
-/* تایم‌لاین */
-.timeline {
+/* سه مرحله کنار هم؛ مرحله فعلی پهن‌تر */
+.journey {
+  --rail-top: 57px;
   position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.35fr);
+  gap: 0 clamp(28px, 4vw, 56px);
   margin: 0;
   padding: 0;
-  padding-inline-start: 36px;
   list-style: none;
 }
 
-/* خط عمودی */
-.timeline::before {
+/* خط پایه مسیر */
+.journey::before,
+.journey::after {
   content: "";
   position: absolute;
-  top: 10px;
-  bottom: 10px;
-  inset-inline-start: 6px;
-  width: 1px;
-  background: var(--line-strong);
+  top: var(--rail-top);
+  inset-inline: 0;
+  height: 2px;
 }
 
-.role {
+.journey::before {
+  background: rgba(3, 63, 89, 0.18);
+}
+
+/* خط نارنجی؛ مقدار --journey-progress را script.js همراه اسکرول تنظیم می‌کند.
+   بدون جاوااسکریپت یا با کاهش حرکت، خط کامل نمایش داده می‌شود. */
+.journey::after {
+  background: linear-gradient(to left, var(--orange) 70%, rgba(191, 64, 13, 0));
+  transform: scaleX(var(--journey-progress, 1));
+  transform-origin: right center;
+  transition: transform 0.6s var(--ease-out);
+}
+
+html[dir="ltr"] .journey::after {
+  background: linear-gradient(to right, var(--orange) 70%, rgba(191, 64, 13, 0));
+  transform-origin: left center;
+}
+
+.stage {
   position: relative;
-  padding-block-end: 40px;
+  min-width: 0;
 }
 
-.role:last-child {
-  padding-block-end: 0;
+.stage-year {
+  display: flex;
+  align-items: flex-end;
+  height: 32px;
+  margin-block-end: 18px;
+  color: var(--navy);
+  font-family: "Montserrat", "Estedad", sans-serif;
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
-/* نقطه روی خط */
-.role::before {
-  content: "";
-  position: absolute;
-  top: 9px;
-  inset-inline-start: -36px;
-  width: 13px;
-  height: 13px;
-  border: 2px solid var(--orange);
+.stage.is-current .stage-year {
+  color: var(--orange);
+  font-weight: 600;
+}
+
+.stage-node {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--navy);
   border-radius: 50%;
   background: var(--cream-deep);
 }
 
-.role.is-current::before {
+.stage.is-current .stage-node {
+  border-color: var(--orange);
   background: var(--orange);
-  box-shadow: 0 0 0 6px rgba(191, 64, 13, 0.15);
+  box-shadow: 0 0 0 6px rgba(191, 64, 13, 0.14);
 }
 
-.role-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 14px;
-  margin-block-end: 14px;
+/* نقش‌هایی که خط هنوز به آن‌ها نرسیده، کم‌رنگ منتظر می‌مانند */
+html.motion-ready .stage > :not(.stage-node) {
+  transition:
+    opacity 0.8s var(--ease-out),
+    transform 0.8s var(--ease-out);
 }
 
-.role-head h4 {
-  margin: 0;
+html.motion-ready .stage:not(.is-reached) > :not(.stage-node) {
+  opacity: 0.25;
+  transform: translateY(10px);
+}
+
+html.motion-ready .stage-node {
+  transition:
+    border-color 0.4s ease,
+    background-color 0.4s ease,
+    box-shadow 0.4s ease,
+    transform 0.5s var(--ease-out);
+}
+
+html.motion-ready .stage:not(.is-reached) .stage-node {
+  border-color: rgba(3, 63, 89, 0.3);
+  background: var(--cream-deep);
+  box-shadow: none;
+  transform: scale(0.75);
+}
+
+/* نقش فعلی فقط یک بار، هنگام رسیدن خط، موج می‌زند */
+.stage.is-current.is-reached .stage-node {
+  animation: node-pulse 1.4s var(--ease-out) 0.3s 1;
+}
+
+.stage-title {
+  margin-block: 26px 10px;
   font-size: 22px;
   font-weight: 800;
   line-height: 1.4;
 }
 
-html[lang="en"] .role-head h4 {
+html[lang="en"] .stage-title {
   letter-spacing: -0.02em;
 }
 
-.role-badge {
-  padding: 3px 12px;
-  border-radius: 999px;
-  background: var(--orange);
-  color: var(--cream);
-  font-size: 12.5px;
-  font-weight: 600;
+.stage-summary {
+  margin-block-end: 20px;
+  color: var(--navy);
+  font-size: 15.5px;
+  font-weight: 500;
+  line-height: 1.95;
+}
+
+html[lang="en"] .stage-summary {
+  line-height: 1.6;
+}
+
+/* فهرست وظایف با خطوط نازک، به سبک ادیتوریال */
+.stage-points {
+  border-top: 1px solid var(--line);
+}
+
+.stage-points li {
+  padding-block: 9px;
+  border-bottom: 1px solid var(--line);
+  color: #5A534D;
+  font-size: 14px;
   line-height: 1.8;
-  white-space: nowrap;
 }
 
-.role-badge--muted {
-  border: 1px solid var(--line-strong);
-  background: transparent;
-  color: var(--muted);
-}
-
-.role-tasks {
-  display: grid;
-  gap: 6px;
-}
-
-.role-tasks li {
-  position: relative;
-  padding-inline-start: 22px;
-  color: #4A433E;
-  font-size: 15px;
-  line-height: 1.9;
-}
-
-html[lang="en"] .role-tasks li {
-  line-height: 1.65;
-}
-
-/* خط کوتاه به‌جای بولت */
-.role-tasks li::before {
-  content: "";
-  position: absolute;
-  top: 0.95em;
-  inset-inline-start: 0;
-  width: 10px;
-  height: 2px;
-  background: var(--orange);
-}
-
-html[lang="en"] .role-tasks li::before {
-  top: 0.8em;
+html[lang="en"] .stage-points li {
+  line-height: 1.55;
 }
 
 
@@ -974,50 +1013,80 @@ html[lang="en"] .edu-info h3 {
   background: var(--navy);
 }
 
-.skills-grid {
+/* توانمندی‌ها: ردیف‌های ادیتوریال */
+.competencies {
+  border-top: 1px solid var(--line-strong);
+}
+
+.comp-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 16px;
+  grid-template-columns: 64px minmax(0, 0.9fr) minmax(0, 1.6fr);
+  align-items: start;
+  gap: 16px clamp(24px, 4vw, 64px);
+  padding-block: clamp(28px, 3.5vw, 44px);
+  border-bottom: 1px solid var(--line);
 }
 
-.skill-group {
-  padding: 28px 26px 30px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--cream-deep);
+.comp-num {
+  padding-block-start: 6px;
+  color: var(--orange);
+  font-family: var(--font-en);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
 }
 
-.skill-group h3 {
-  margin-block: 36px 20px;
-  font-size: 20px;
+.comp-title {
+  font-size: clamp(21px, 2vw, 26px);
   font-weight: 800;
-  line-height: 1.5;
+  line-height: 1.45;
+  transition: color 0.3s ease;
 }
 
-html[lang="en"] .skill-group h3 {
+html[lang="en"] .comp-title {
+  line-height: 1.25;
   letter-spacing: -0.02em;
 }
 
-/* برچسب‌های مهارت */
-.chips {
+.comp-row:hover .comp-title {
+  color: var(--navy);
+}
+
+.comp-list {
+  columns: 2;
+  column-gap: 40px;
+}
+
+.comp-list li {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  align-items: baseline;
+  gap: 12px;
+  padding-block: 10px;
+  border-bottom: 1px solid var(--line);
+  break-inside: avoid;
+  font-size: 15.5px;
+  line-height: 1.7;
+  transition: color 0.25s ease;
 }
 
-.chips li {
-  padding: 5px 14px;
-  border: 1px solid rgba(20, 17, 16, 0.18);
-  border-radius: 999px;
-  background: var(--cream);
-  font-size: 13.5px;
-  line-height: 1.8;
-  transition: border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease;
+.comp-list li::before {
+  content: "";
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--coral);
+  transform: translateY(-2px);
+  transition: transform 0.3s var(--ease-out), background-color 0.3s ease;
 }
 
-.chips li:hover {
-  border-color: var(--orange);
+.comp-list li:hover {
   color: var(--orange);
+}
+
+.comp-list li:hover::before {
+  background: var(--orange);
+  transform: translateY(-2px) scale(1.5);
 }
 
 .section-intro {
@@ -1284,6 +1353,11 @@ html[dir="rtl"] .contact-value {
 
 
 /* ---------- 6. انیمیشن‌ها ---------- */
+@keyframes node-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(191, 64, 13, 0.45); }
+  100% { box-shadow: 0 0 0 16px rgba(191, 64, 13, 0); }
+}
+
 @keyframes scroll-cue {
   0% { transform: translateY(0); opacity: 1; }
   70% { transform: translateY(14px); opacity: 0; }
@@ -1400,6 +1474,57 @@ html.is-loaded .portrait-frame {
   }
 }
 
+/* مسیر پیشرفت عمودی در تبلت باریک و موبایل */
+@media (max-width: 860px) {
+  .journey {
+    --rail-x: 7px;
+    grid-template-columns: minmax(0, 1fr);
+    padding-inline-start: 40px;
+  }
+
+  .journey::before,
+  .journey::after {
+    top: 8px;
+    bottom: 8px;
+    inset-inline: auto;
+    inset-inline-start: var(--rail-x);
+    width: 2px;
+    height: auto;
+  }
+
+  .journey::after,
+  html[dir="ltr"] .journey::after {
+    background: linear-gradient(to bottom, var(--orange) 75%, rgba(191, 64, 13, 0));
+    transform: scaleY(var(--journey-progress, 1));
+    transform-origin: center top;
+  }
+
+
+  .stage {
+    padding-block-end: 48px;
+  }
+
+  .stage:last-child {
+    padding-block-end: 0;
+  }
+
+  .stage-year {
+    height: auto;
+    margin-block-end: 0;
+    font-size: 24px;
+  }
+
+  .stage-node {
+    position: absolute;
+    top: 6px;
+    inset-inline-start: calc(-40px + var(--rail-x) - 6.5px);
+  }
+
+  .stage-title {
+    margin-block-start: 12px;
+  }
+}
+
 /* موبایل */
 @media (max-width: 760px) {
   :root {
@@ -1481,18 +1606,6 @@ html.is-loaded .portrait-frame {
     font-size: 16px;
   }
 
-  .timeline {
-    padding-inline-start: 28px;
-  }
-
-  .role::before {
-    inset-inline-start: -28px;
-  }
-
-  .role-head h4 {
-    font-size: 20px;
-  }
-
   .edu-card {
     grid-template-columns: auto minmax(0, 1fr);
     grid-template-areas:
@@ -1511,8 +1624,14 @@ html.is-loaded .portrait-frame {
     justify-self: end;
   }
 
-  .skill-group h3 {
-    margin-block-start: 24px;
+  .comp-row {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 14px 12px;
+  }
+
+  .comp-list {
+    grid-column: 1 / -1;
+    columns: 1;
   }
 
   .about-content p {
@@ -1623,5 +1742,13 @@ html.is-loaded .portrait-frame {
 
   html.motion-ready .portrait-frame {
     clip-path: none;
+  }
+}
+
+
+/* گوشی افقی و صفحه‌های کم‌ارتفاع: نشانگر اسکرول روی عکس نیفتد */
+@media (max-height: 600px) {
+  .scroll-cue {
+    display: none;
   }
 }

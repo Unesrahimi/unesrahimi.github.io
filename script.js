@@ -19,7 +19,7 @@ const translations = {
     navAbout: "درباره من",
     navValues: "مهم‌ها برای یونس",
     navCareer: "مسیر حرفه‌ای",
-    navSkills: "مهارت‌ها",
+    navSkills: "توانمندی‌ها",
 
     /* --- مسیر حرفه‌ای --- */
     careerTitle: "مسیر حرفه‌ای",
@@ -32,8 +32,11 @@ const translations = {
     profileP1: "فردی کنجکاو، خلاق و رشدمحور هستم؛ با پیشینه تحصیلی در علوم ورزشی و حدود پنج سال تجربه در حوزه خرده‌فروشی در KOMONO.",
     profileP2: "در این مسیر، مهارت‌های عملی در رهبری تیم، آموزش کارکنان، تجربه مشتری و بهبود عملکرد فروش به دست آورده‌ام. برای یادگیری مداوم، حل خلاقانه مسائل و تبدیل ایده‌ها به نتایج معنادار ارزش زیادی قائلم.",
     profileP3: "فراتر از کار حرفه‌ای، به کشف ایده‌های تازه، توسعه مهارت‌های دیجیتال و کار روی پروژه‌های شخصی علاقه دارم؛ پروژه‌هایی که به من فرصت یادگیری، آزمودن و رشد می‌دهند.",
-    companyMeta: "خرده‌فروشی و مدیریت فروشگاه · حدود ۵ سال",
-    companyIntro: "مسیر حرفه‌ای من در KOMONO با فروش شروع شد و به‌تدریج با پذیرفتن مسئولیت‌های سرپرستی، به جایگاه فعلی‌ام به‌عنوان مدیر فروشگاه رسید.",
+    companyMeta: "خرده‌فروشی و مدیریت فروشگاه · 2021 — اکنون",
+    companyIntro: "از سال 2021 در KOMONO هستم؛ مسیری که با فروش شروع شد، با مسئولیت‌های سرپرستی ادامه پیدا کرد و امروز به مدیریت شعبه رسیده.",
+    stage1Summary: "نقطه شروع: شناخت نزدیک مشتری، محصول و ریتم روزانه فروشگاه.",
+    stage2Summary: "از فروش به هماهنگی: پذیرفتن مسئولیت روند کار تیم و عملیات روزانه.",
+    stage3Summary: "مسئولیت کامل یک شعبه: هدایت تیمی سه‌نفره، آموزش نیروهای جدید و تمرکز بر فروش و تجربه مشتری.",
     role3Title: "مدیر فروشگاه",
     role3Date: "2024 — اکنون",
     role3Tasks: [
@@ -46,13 +49,14 @@ const translations = {
       "هماهنگی فعالیت‌های فروش و پشتیبانی از اهداف کسب‌وکار"
     ],
     role2Title: "سرپرست فروشگاه",
+    role2Date: "2023",
     role2Tasks: [
       "هماهنگی عملیات روزانه فروشگاه",
       "پشتیبانی از عملکرد و روند کاری تیم",
       "کمک به هماهنگی کارکنان و مدیریت فروشگاه"
     ],
     role1Title: "کارشناس فروش",
-    role1Date: "شروع مسیر",
+    role1Date: "2021",
     role1Tasks: [
       "خدمات مشتری و ایجاد ارتباط مثبت با مشتریان",
       "معرفی محصولات و انجام فرایند فروش",
@@ -67,7 +71,8 @@ const translations = {
     degreeMsc: "کارشناسی ارشد مدیریت علوم ورزشی",
     degreeBsc: "کارشناسی علوم ورزشی",
     university: "دانشگاه فردوسی مشهد، ایران",
-    skillsTitle: "مهارت‌ها",
+    skillsTitle: "توانمندی‌های کلیدی",
+    skillsIntro: "مهارت‌هایی که در کار روزانه فروشگاه، از کف فروش تا مدیریت شعبه، شکل گرفته‌اند.",
     skillGroup1: "مدیریت فروشگاه و کسب‌وکار",
     skillList1: [
       "مدیریت فروشگاه خرده‌فروشی",
@@ -130,10 +135,10 @@ const translations = {
     navAbout: "About",
     navValues: "What Matters",
     navCareer: "Career",
-    navSkills: "Skills",
+    navSkills: "Competencies",
 
     /* --- Career --- */
-    careerTitle: "Career Journey",
+    careerTitle: "Professional Journey",
     stat1Value: "5+",
     stat1Label: "Years of retail experience",
     stat2Value: "3",
@@ -143,8 +148,11 @@ const translations = {
     profileP1: "I am a curious, creative, and growth-oriented professional with a background in Sport Sciences and approximately five years of experience in retail at KOMONO.",
     profileP2: "Through this experience, I have developed practical skills in team leadership, employee training, customer experience, and sales performance improvement. I value continuous learning, creative problem-solving, and the opportunity to turn ideas into meaningful results.",
     profileP3: "Beyond my professional career, I am interested in exploring new ideas, developing digital skills, and working on personal projects that allow me to learn, experiment, and grow.",
-    companyMeta: "Retail & Store Management · ~5 years",
-    companyIntro: "My professional journey at KOMONO began as a Sales Associate and gradually progressed through supervisory responsibilities to my current position as a Store Manager.",
+    companyMeta: "Retail & Store Management · 2021 — Present",
+    companyIntro: "I joined KOMONO in 2021. The path began on the sales floor, grew through supervisory responsibility, and today means running a branch.",
+    stage1Summary: "Where it began: getting close to the customer, the product, and the daily rhythm of the store.",
+    stage2Summary: "From selling to coordinating: taking responsibility for team workflow and daily operations.",
+    stage3Summary: "Full ownership of a branch: leading a three-person team, training new staff, and focusing on sales and customer experience.",
     role3Title: "Store Manager",
     role3Date: "2024 — Present",
     role3Tasks: [
@@ -157,13 +165,14 @@ const translations = {
       "Coordinating sales activities and supporting business objectives"
     ],
     role2Title: "Store Supervisor",
+    role2Date: "2023",
     role2Tasks: [
       "Coordinating daily store operations",
       "Supporting team performance and workflow",
       "Assisting with staff coordination and store management"
     ],
     role1Title: "Sales Associate",
-    role1Date: "Where it started",
+    role1Date: "2021",
     role1Tasks: [
       "Customer service and building positive customer relationships",
       "Product presentation and sales operations",
@@ -178,7 +187,8 @@ const translations = {
     degreeMsc: "Master's in Sport Management",
     degreeBsc: "Bachelor of Science in Sport Sciences",
     university: "Ferdowsi University of Mashhad, Iran",
-    skillsTitle: "Skills",
+    skillsTitle: "Core Competencies",
+    skillsIntro: "Skills shaped by daily work in retail — from the sales floor to running a branch.",
     skillGroup1: "Store & Business Management",
     skillList1: [
       "Retail Store Management",
@@ -349,6 +359,8 @@ function initWebsite() {
 
   /* ---------- 4. رویدادهای اسکرول ---------- */
   let ticking = false;
+  // در بخش ۶ مقدار واقعی می‌گیرد (فقط وقتی انیمیشن مجاز است)
+  let updateJourney = () => {};
 
   function updateScroll() {
     const scrollTop = window.scrollY;
@@ -356,6 +368,7 @@ function initWebsite() {
     const progress = maxScroll > 0 ? scrollTop / maxScroll : 0;
 
     if (progressBar) progressBar.style.transform = `scaleX(${progress})`;
+    updateJourney();
     navbar?.classList.toggle("is-scrolled", scrollTop > 8);
     backToTop?.classList.toggle("is-visible", scrollTop > window.innerHeight * 0.8);
 
@@ -409,11 +422,10 @@ function initWebsite() {
     ".pull-quote",
     ".stat",
     ".profile > p",
-    ".company-head",
-    ".company-intro",
-    ".role",
+    ".journey-head",
+    ".journey-intro",
     ".edu-card",
-    ".skill-group",
+    ".comp-row",
     ".value-card",
     ".contact-heading",
     ".contact-list li"
@@ -450,6 +462,47 @@ function initWebsite() {
     });
 
     document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+
+    /* مسیر حرفه‌ای: خط نارنجی همراه اسکرول جلو می‌رود
+       و هر نقش وقتی خط به آن می‌رسد روشن می‌شود (فقط رو به جلو) */
+    const journey = document.querySelector(".journey");
+
+    if (journey) {
+      const stages = [...journey.querySelectorAll(".stage")];
+      const verticalLayout = window.matchMedia("(max-width: 860px)");
+      let reached = 0;
+
+      updateJourney = () => {
+        const rect = journey.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const vertical = verticalLayout.matches;
+
+        // افقی: در حدود نیم صفحه اسکرول پر می‌شود / عمودی: هم‌پای خواندن
+        const raw = vertical
+          ? (vh * 0.6 - rect.top) / rect.height
+          : (vh * 0.85 - rect.top) / (vh * 0.5);
+
+        reached = Math.max(reached, Math.min(Math.max(raw, 0), 1));
+        journey.style.setProperty("--journey-progress", reached.toFixed(4));
+
+        if (reached === 0) return;
+
+        stages.forEach((stage) => {
+          if (stage.classList.contains("is-reached")) return;
+          const node = stage.querySelector(".stage-node").getBoundingClientRect();
+          let position;
+
+          if (vertical) {
+            position = (node.top + node.height / 2 - rect.top) / rect.height;
+          } else {
+            const centerX = node.left + node.width / 2;
+            position = (root.dir === "rtl" ? rect.right - centerX : centerX - rect.left) / rect.width;
+          }
+
+          if (reached >= position - 0.02) stage.classList.add("is-reached");
+        });
+      };
+    }
 
     // شروع انیمیشن‌های Hero بعد از رندر اول
     requestAnimationFrame(() => {
