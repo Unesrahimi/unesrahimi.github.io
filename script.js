@@ -1,7 +1,7 @@
 /* =========================================================
    Unes Rahimi — script.js
    1. متن‌های دوزبانه
-   2. تغییر زبان
+   2. تغییر زبان (و حالت روشن / تاریک)
    3. منوی موبایل
    4. اسکرول: نوار پیشرفت، حالت منو، دکمه بازگشت به بالا
    5. پررنگ کردن لینک بخش فعال
@@ -125,7 +125,9 @@ const translations = {
     languageLabel: "تغییر زبان به انگلیسی",
     menuOpen: "باز کردن منو",
     menuClose: "بستن منو",
-    backToTop: "بازگشت به بالا"
+    backToTop: "بازگشت به بالا",
+    themeToDark: "تغییر به حالت تاریک",
+    themeToLight: "تغییر به حالت روشن"
   },
 
   en: {
@@ -241,11 +243,14 @@ const translations = {
     languageLabel: "Switch language to Persian",
     menuOpen: "Open menu",
     menuClose: "Close menu",
-    backToTop: "Back to top"
+    backToTop: "Back to top",
+    themeToDark: "Switch to dark mode",
+    themeToLight: "Switch to light mode"
   }
 };
 
 const STORAGE_KEY = "siteLanguage";
+const THEME_KEY = "siteTheme";
 
 
 function initWebsite() {
@@ -254,6 +259,8 @@ function initWebsite() {
   const navLinks = document.getElementById("navLinks");
   const menuToggle = document.getElementById("menuToggle");
   const languageToggle = document.getElementById("languageToggle");
+  const themeToggle = document.getElementById("themeToggle");
+  const themeColorMeta = document.querySelector('meta[name="theme-color"]');
   const progressBar = document.getElementById("scrollProgress");
   const backToTop = document.getElementById("backToTop");
   const yearEl = document.getElementById("currentYear");
@@ -305,6 +312,7 @@ function initWebsite() {
     }
 
     updateMenuLabel();
+    updateThemeLabel();
     updateScroll();
 
     try {
@@ -317,6 +325,50 @@ function initWebsite() {
   languageToggle?.addEventListener("click", () => {
     setLanguage(currentLanguage === "fa" ? "en" : "fa");
   });
+
+
+  /* ---------- 2-1. حالت روشن / تاریک ---------- */
+  // مقدار اولیه را اسکریپت داخل head روی <html> گذاشته است
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function currentTheme() {
+    return root.dataset.theme === "dark" ? "dark" : "light";
+  }
+
+  function updateThemeLabel() {
+    if (!themeToggle) return;
+    const t = translations[currentLanguage];
+    themeToggle.setAttribute("aria-label", currentTheme() === "dark" ? t.themeToLight : t.themeToDark);
+  }
+
+  function setTheme(theme, save) {
+    root.dataset.theme = theme;
+    themeColorMeta?.setAttribute("content", theme === "dark" ? "#121010" : "#FFFBF5");
+    updateThemeLabel();
+
+    if (save) {
+      try {
+        localStorage.setItem(THEME_KEY, theme);
+      } catch (_) {
+        /* بدون حافظه مرورگر هم تغییر حالت کار می‌کند */
+      }
+    }
+  }
+
+  themeToggle?.addEventListener("click", () => {
+    setTheme(currentTheme() === "dark" ? "light" : "dark", true);
+  });
+
+  // اگر کاربر خودش انتخابی نکرده، با تنظیمات دستگاه هماهنگ بماند
+  systemDark.addEventListener("change", (e) => {
+    let stored = null;
+    try {
+      stored = localStorage.getItem(THEME_KEY);
+    } catch (_) {}
+    if (!stored) setTheme(e.matches ? "dark" : "light", false);
+  });
+
+  setTheme(currentTheme(), false);
 
 
   /* ---------- 3. منوی موبایل ---------- */

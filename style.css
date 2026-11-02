@@ -31,6 +31,23 @@
   --on-navy: rgba(255, 251, 245, 0.72);
   --on-navy-line: rgba(255, 251, 245, 0.2);
 
+  /* رنگ‌های معنایی — در حالت تاریک مقدارشان عوض می‌شود */
+  --bg: var(--cream);
+  --bg-alt: var(--cream-deep);
+  --surface: var(--cream);
+  --text: var(--ink);
+  --text-soft: #4A433E;
+  --text-faint: #5A534D;
+  --accent: var(--orange);
+  --navy-text: var(--navy);
+  --rail: rgba(3, 63, 89, 0.18);
+  --rail-faint: rgba(3, 63, 89, 0.3);
+  --nav-bg: rgba(255, 251, 245, 0.82);
+  --nav-bg-solid: rgba(255, 251, 245, 0.94);
+  --quote-bg: var(--ink);
+  --footer-bg: var(--ink);
+  color-scheme: light;
+
   /* تایپوگرافی */
   --font-fa: "Estedad", Tahoma, sans-serif;
   --font-en: "Montserrat", "Helvetica Neue", Arial, sans-serif;
@@ -45,6 +62,28 @@
   /* حرکت */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* حالت تاریک — data-theme را script.js (و اسکریپت کوچک داخل head) تنظیم می‌کند */
+html[data-theme="dark"] {
+  --bg: #121010;
+  --bg-alt: #1A1715;
+  --surface: #221E1B;
+  --text: #F5EEE3;
+  --text-soft: #CFC6BD;
+  --text-faint: #B3AAA1;
+  --muted: #9D948C;
+  --line: rgba(255, 251, 245, 0.12);
+  --line-strong: rgba(255, 251, 245, 0.75);
+  --accent: var(--coral);
+  --navy-text: #8EC3DA;
+  --rail: rgba(142, 195, 218, 0.2);
+  --rail-faint: rgba(142, 195, 218, 0.3);
+  --nav-bg: rgba(18, 16, 16, 0.8);
+  --nav-bg-solid: rgba(18, 16, 16, 0.94);
+  --quote-bg: #221E1B;
+  --footer-bg: #0A0908;
+  color-scheme: dark;
 }
 
 
@@ -63,8 +102,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--cream);
-  color: var(--ink);
+  background: var(--bg);
+  color: var(--text);
   font-family: var(--font-fa);
   font-size: 16px;
   line-height: 1.9;
@@ -145,7 +184,7 @@ ul {
 
 /* ---------- 3. اجزای عمومی ---------- */
 .accent {
-  color: var(--orange);
+  color: var(--accent);
 }
 
 .btn {
@@ -171,12 +210,13 @@ ul {
 }
 
 .btn-primary {
-  background: var(--ink);
-  color: var(--cream);
+  background: var(--text);
+  color: var(--bg);
 }
 
 .btn-primary:hover {
   background: var(--orange);
+  color: var(--cream);
 }
 
 .btn-arrow {
@@ -194,8 +234,8 @@ ul {
 }
 
 .btn-ghost:hover {
-  background: var(--ink);
-  color: var(--cream);
+  background: var(--text);
+  color: var(--bg);
 }
 
 .section {
@@ -214,8 +254,8 @@ ul {
   display: inline-block;
   margin-block-end: 18px;
   padding-block-end: 6px;
-  border-bottom: 2px solid var(--orange);
-  color: var(--orange);
+  border-bottom: 2px solid var(--accent);
+  color: var(--accent);
   font-family: var(--font-en);
   font-size: 13px;
   font-weight: 700;
@@ -260,7 +300,7 @@ html[dir="ltr"] .scroll-progress {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(255, 251, 245, 0.82);
+  background: var(--nav-bg);
   backdrop-filter: saturate(160%) blur(14px);
   -webkit-backdrop-filter: saturate(160%) blur(14px);
   border-bottom: 1px solid transparent;
@@ -269,7 +309,7 @@ html[dir="ltr"] .scroll-progress {
 
 .navbar.is-scrolled {
   border-bottom-color: var(--line);
-  background: rgba(255, 251, 245, 0.94);
+  background: var(--nav-bg-solid);
 }
 
 .navbar-inner {
@@ -292,7 +332,7 @@ html[dir="ltr"] .scroll-progress {
 }
 
 .logo span {
-  color: var(--orange);
+  color: var(--accent);
   transition: transform 0.3s var(--ease-out);
   display: inline-block;
 }
@@ -331,7 +371,7 @@ html[dir="ltr"] .scroll-progress {
 
 .nav-links a:hover,
 .nav-links a.is-active {
-  color: var(--ink);
+  color: var(--text);
 }
 
 .nav-links a:hover::after,
@@ -365,8 +405,49 @@ html[lang="en"] .language-toggle {
 }
 
 .language-toggle:hover {
-  background: var(--ink);
-  color: var(--cream);
+  background: var(--text);
+  color: var(--bg);
+}
+
+/* دکمه حالت روشن / تاریک */
+.theme-toggle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  overflow: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.theme-toggle svg {
+  grid-area: 1 / 1;
+  width: 18px;
+  height: 18px;
+  transition: transform 0.5s var(--ease-out), opacity 0.3s ease;
+}
+
+/* در حالت روشن ماه نمایش داده می‌شود (رفتن به تاریک) و برعکس */
+.theme-toggle .icon-sun {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+html[data-theme="dark"] .theme-toggle .icon-sun {
+  opacity: 1;
+  transform: none;
+}
+
+html[data-theme="dark"] .theme-toggle .icon-moon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
 }
 
 /* دکمه همبرگری — فقط در موبایل دیده می‌شود */
@@ -468,7 +549,7 @@ html[lang="en"] .language-toggle {
   font-size: clamp(22px, 2.3vw, 30px);
   font-weight: 700;
   line-height: 1.5;
-  color: var(--navy);
+  color: var(--navy-text);
 }
 
 html[lang="en"] .hero-tagline {
@@ -516,7 +597,7 @@ html[lang="en"] .hero-tagline {
   padding: 12px;
   border: 1px solid var(--line);
   border-radius: 999px 999px var(--radius) var(--radius);
-  background: var(--cream-deep);
+  background: var(--bg-alt);
 }
 
 .portrait-image {
@@ -554,7 +635,7 @@ html[lang="en"] .hero-tagline {
 
 /* ---------- 5-3. درباره من ---------- */
 .about {
-  background: var(--cream);
+  background: var(--bg);
 }
 
 .about .section-heading {
@@ -563,7 +644,7 @@ html[lang="en"] .hero-tagline {
 }
 
 .about-content p {
-  color: #4A433E;
+  color: var(--text-soft);
   font-size: 17px;
   line-height: 2.2;
 }
@@ -577,7 +658,7 @@ html[lang="en"] .about-content p {
 }
 
 .about-content .lead {
-  color: var(--ink);
+  color: var(--text);
   font-size: clamp(20px, 1.9vw, 25px);
   font-weight: 600;
   line-height: 2;
@@ -593,7 +674,7 @@ html[lang="en"] .about-content .lead {
   margin-block-start: 48px;
   padding: 32px 36px;
   border-radius: var(--radius);
-  background: var(--ink);
+  background: var(--quote-bg);
   color: var(--cream);
   overflow: hidden;
 }
@@ -620,7 +701,7 @@ html[lang="en"] .about-content .lead {
 
 /* ---------- 5-3-1. مسیر حرفه‌ای ---------- */
 .career {
-  background: var(--cream-deep);
+  background: var(--bg-alt);
 }
 
 .career .section-heading {
@@ -651,7 +732,7 @@ html[lang="en"] .about-content .lead {
   unicode-bidi: isolate;
   text-align: left;
   margin: 0;
-  color: var(--orange);
+  color: var(--accent);
   font-size: clamp(34px, 3.4vw, 46px);
   font-weight: 800;
   line-height: 1;
@@ -674,7 +755,7 @@ html[lang="en"] .stat dd {
 
 /* معرفی حرفه‌ای */
 .profile p {
-  color: #4A433E;
+  color: var(--text-soft);
   font-size: 17px;
   line-height: 2.2;
 }
@@ -688,7 +769,7 @@ html[lang="en"] .profile p {
 }
 
 .profile .lead {
-  color: var(--ink);
+  color: var(--text);
   font-size: clamp(20px, 1.9vw, 25px);
   font-weight: 600;
   line-height: 2;
@@ -762,7 +843,7 @@ html[lang="en"] .journey-intro {
 }
 
 .journey::before {
-  background: rgba(3, 63, 89, 0.18);
+  background: var(--rail);
 }
 
 /* خط نارنجی؛ مقدار --journey-progress را script.js همراه اسکرول تنظیم می‌کند.
@@ -789,7 +870,7 @@ html[dir="ltr"] .journey::after {
   align-items: flex-end;
   height: 32px;
   margin-block-end: 18px;
-  color: var(--navy);
+  color: var(--navy-text);
   font-family: "Montserrat", "Estedad", sans-serif;
   font-size: 28px;
   font-weight: 300;
@@ -799,7 +880,7 @@ html[dir="ltr"] .journey::after {
 }
 
 .stage.is-current .stage-year {
-  color: var(--orange);
+  color: var(--accent);
   font-weight: 600;
 }
 
@@ -809,9 +890,9 @@ html[dir="ltr"] .journey::after {
   display: block;
   width: 15px;
   height: 15px;
-  border: 2px solid var(--navy);
+  border: 2px solid var(--navy-text);
   border-radius: 50%;
-  background: var(--cream-deep);
+  background: var(--bg-alt);
 }
 
 .stage.is-current .stage-node {
@@ -841,8 +922,8 @@ html.motion-ready .stage-node {
 }
 
 html.motion-ready .stage:not(.is-reached) .stage-node {
-  border-color: rgba(3, 63, 89, 0.3);
-  background: var(--cream-deep);
+  border-color: var(--rail-faint);
+  background: var(--bg-alt);
   box-shadow: none;
   transform: scale(0.75);
 }
@@ -865,7 +946,7 @@ html[lang="en"] .stage-title {
 
 .stage-summary {
   margin-block-end: 20px;
-  color: var(--navy);
+  color: var(--navy-text);
   font-size: 15.5px;
   font-weight: 500;
   line-height: 1.95;
@@ -883,7 +964,7 @@ html[lang="en"] .stage-summary {
 .stage-points li {
   padding-block: 9px;
   border-bottom: 1px solid var(--line);
-  color: #5A534D;
+  color: var(--text-faint);
   font-size: 14px;
   line-height: 1.8;
 }
@@ -895,7 +976,7 @@ html[lang="en"] .stage-points li {
 
 /* ---------- 5-3-2. تحصیلات و مهارت‌ها ---------- */
 .skills {
-  background: var(--cream);
+  background: var(--bg);
 }
 
 /* تحصیلات: سرمه‌ای + نارنجی + کرم */
@@ -924,8 +1005,8 @@ html[lang="en"] .stage-points li {
   gap: 16px clamp(20px, 3vw, 40px);
   padding: clamp(26px, 3vw, 38px) clamp(24px, 3.5vw, 44px);
   border-radius: var(--radius);
-  background: var(--cream);
-  color: var(--ink);
+  background: var(--surface);
+  color: var(--text);
   overflow: hidden;
   transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
 }
@@ -951,9 +1032,9 @@ html[lang="en"] .stage-points li {
   place-items: center;
   width: 48px;
   height: 48px;
-  border: 1.5px solid var(--navy);
+  border: 1.5px solid var(--navy-text);
   border-radius: 50%;
-  color: var(--navy);
+  color: var(--navy-text);
   font-family: var(--font-en);
   font-size: 14px;
   font-weight: 700;
@@ -971,7 +1052,7 @@ html[lang="en"] .stage-points li {
   font-weight: 200;
   line-height: 1;
   letter-spacing: 0.02em;
-  color: var(--orange);
+  color: var(--accent);
   direction: ltr;
   unicode-bidi: isolate;
 }
@@ -981,7 +1062,7 @@ html[dir="rtl"] .edu-mark {
 }
 
 .edu-info h3 {
-  color: var(--navy);
+  color: var(--navy-text);
   font-size: clamp(20px, 2vw, 26px);
   font-weight: 800;
   line-height: 1.5;
@@ -1029,7 +1110,7 @@ html[lang="en"] .edu-info h3 {
 
 .comp-num {
   padding-block-start: 6px;
-  color: var(--orange);
+  color: var(--accent);
   font-family: var(--font-en);
   font-size: 14px;
   font-weight: 700;
@@ -1049,7 +1130,7 @@ html[lang="en"] .comp-title {
 }
 
 .comp-row:hover .comp-title {
-  color: var(--navy);
+  color: var(--navy-text);
 }
 
 .comp-list {
@@ -1081,7 +1162,7 @@ html[lang="en"] .comp-title {
 }
 
 .comp-list li:hover {
-  color: var(--orange);
+  color: var(--accent);
 }
 
 .comp-list li:hover::before {
@@ -1104,7 +1185,7 @@ html[lang="en"] .section-intro {
 
 /* ---------- 5-4. مهم‌ها ---------- */
 .values {
-  background: var(--cream-deep);
+  background: var(--bg-alt);
 }
 
 .section-heading--row {
@@ -1128,7 +1209,7 @@ html[lang="en"] .section-intro {
   padding: 28px 26px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: var(--cream);
+  background: var(--surface);
   overflow: hidden;
   isolation: isolate;
   transition:
@@ -1159,7 +1240,7 @@ html[lang="en"] .section-intro {
 }
 
 .value-number {
-  color: var(--orange);
+  color: var(--accent);
   font-family: var(--font-en);
   font-size: 14px;
   font-weight: 700;
@@ -1287,7 +1368,7 @@ html[dir="rtl"] .contact-value {
 
 /* ---------- 5-6. پانوشت ---------- */
 .footer {
-  background: var(--ink);
+  background: var(--footer-bg);
   color: var(--cream);
 }
 
@@ -1348,7 +1429,8 @@ html[dir="rtl"] .contact-value {
 }
 
 .back-to-top:hover {
-  background: var(--ink);
+  background: var(--text);
+  color: var(--bg);
 }
 
 
@@ -1437,7 +1519,7 @@ html.is-loaded .portrait-frame {
     justify-content: flex-start;
     gap: 0;
     padding: 24px var(--gutter);
-    background: var(--cream);
+    background: var(--bg);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-12px);
@@ -1456,7 +1538,7 @@ html.is-loaded .portrait-frame {
   .nav-links a {
     padding-block: 18px;
     border-bottom: 1px solid var(--line);
-    color: var(--ink);
+    color: var(--text);
     font-size: 26px;
     font-weight: 700;
   }
@@ -1466,7 +1548,7 @@ html.is-loaded .portrait-frame {
   }
 
   .nav-links a.is-active {
-    color: var(--orange);
+    color: var(--accent);
   }
 
   body.menu-open {
@@ -1714,7 +1796,7 @@ html.is-loaded .portrait-frame {
   }
 
   .value-card:hover .value-number {
-    color: var(--orange);
+    color: var(--accent);
   }
 }
 
