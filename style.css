@@ -386,6 +386,9 @@ html[dir="ltr"] .scroll-progress {
 }
 
 .language-toggle {
+  display: inline-grid;
+  place-items: center;
+  line-height: 1;
   min-width: 52px;
   height: 38px;
   padding: 0 14px;

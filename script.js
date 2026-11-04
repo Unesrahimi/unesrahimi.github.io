@@ -13,8 +13,8 @@
 /* ---------- 1. متن‌ها ---------- */
 const translations = {
   fa: {
-    pageTitle: "یونس رحیمی — Unes Rahimi",
-    metaDescription: "وب‌سایت شخصی یونس رحیمی؛ ایده‌ها، تجربه‌ها و مسیر رشد من.",
+    pageTitle: "یونس رحیمی (Unes Rahimi) — مدیر فروشگاه و فعال حوزه خرده‌فروشی",
+    metaDescription: "یونس رحیمی، مدیر فروشگاه KOMONO با بیش از ۵ سال تجربه در خرده‌فروشی، رهبری تیم و تجربه مشتری؛ فارغ‌التحصیل علوم ورزشی دانشگاه فردوسی مشهد و دانشجوی ارشد مدیریت ورزشی.",
     skipLink: "رفتن به محتوای اصلی",
     navAbout: "درباره من",
     navValues: "مهم‌ها برای یونس",
@@ -131,8 +131,8 @@ const translations = {
   },
 
   en: {
-    pageTitle: "Unes Rahimi — Make Your Mark",
-    metaDescription: "The personal website of Unes Rahimi: ideas, experiences, and a journey of growth.",
+    pageTitle: "Unes Rahimi — Store Manager & Retail Professional",
+    metaDescription: "Unes Rahimi is a Store Manager at KOMONO with 5+ years of retail experience in team leadership, staff training, and customer experience. Sport Sciences graduate, Ferdowsi University of Mashhad.",
     skipLink: "Skip to main content",
     navAbout: "About",
     navValues: "What Matters",
@@ -249,7 +249,6 @@ const translations = {
   }
 };
 
-const STORAGE_KEY = "siteLanguage";
 const THEME_KEY = "siteTheme";
 
 
@@ -314,16 +313,14 @@ function initWebsite() {
     updateMenuLabel();
     updateThemeLabel();
     updateScroll();
-
-    try {
-      localStorage.setItem(STORAGE_KEY, currentLanguage);
-    } catch (_) {
-      /* اگر حافظه مرورگر در دسترس نباشد، تغییر زبان همچنان کار می‌کند */
-    }
   }
 
-  languageToggle?.addEventListener("click", () => {
-    setLanguage(currentLanguage === "fa" ? "en" : "fa");
+  // هر زبان صفحه و آدرس جدای خودش را دارد (/ فارسی، /en/ انگلیسی) تا گوگل هر دو را ایندکس کند.
+  // دکمه زبان یک لینک واقعی است؛ اینجا فقط بخشی که کاربر در آن بوده (#hash) حفظ می‌شود.
+  languageToggle?.addEventListener("click", (event) => {
+    if (!location.hash) return;
+    event.preventDefault();
+    location.href = languageToggle.getAttribute("href") + location.hash;
   });
 
 
@@ -564,15 +561,8 @@ function initWebsite() {
 
 
   /* ---------- شروع ---------- */
-  let savedLanguage = "fa";
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored === "fa" || stored === "en") savedLanguage = stored;
-  } catch (_) {
-    /* زبان پیش‌فرض: فارسی */
-  }
-
-  setLanguage(savedLanguage);
+  // زبان از خود صفحه خوانده می‌شود: <html lang="fa"> یا <html lang="en">
+  setLanguage(root.lang === "en" ? "en" : "fa");
 }
 
 
